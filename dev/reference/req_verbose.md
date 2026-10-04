@@ -85,25 +85,25 @@ resp <- request("https://httr2.r-lib.org") |>
 #> <- HTTP/2 200 
 #> <- server: GitHub.com
 #> <- content-type: text/html; charset=utf-8
-#> <- last-modified: Sun, 04 Oct 2026 15:50:30 GMT
+#> <- last-modified: Sun, 04 Oct 2026 21:35:30 GMT
 #> <- access-control-allow-origin: *
-#> <- etag: W/"6ac275c6-4c24"
-#> <- expires: Sun, 04 Oct 2026 16:04:35 GMT
+#> <- etag: W/"6ac2c6a2-4c24"
+#> <- expires: Sun, 04 Oct 2026 21:49:06 GMT
 #> <- cache-control: max-age=600
 #> <- content-encoding: gzip
 #> <- x-proxy-cache: MISS
-#> <- x-github-request-id: 0AA8:F01FA:919C1B:BC050C:6AC276BB
+#> <- x-github-request-id: 90B2:1B28BC:CF41CD:1087C1F:6AC2C77A
 #> <- x-github-edge-region: iad
 #> <- accept-ranges: bytes
-#> <- date: Sun, 04 Oct 2026 15:55:12 GMT
+#> <- date: Sun, 04 Oct 2026 21:39:59 GMT
 #> <- via: 1.1 varnish
-#> <- age: 0
-#> <- x-served-by: cache-iad-kcgs7200150-IAD
+#> <- age: 21
+#> <- x-served-by: cache-iad-kcgs7200021-IAD
 #> <- x-cache: HIT
-#> <- x-cache-hits: 1
-#> <- x-timer: S1791129313.638954,VS0,VE23
+#> <- x-cache-hits: 2
+#> <- x-timer: S1791150000.553313,VS0,VE1
 #> <- vary: Accept-Encoding
-#> <- x-fastly-request-id: f193264236a0508441c4ecc397d279eba91dd685
+#> <- x-fastly-request-id: 99132f10ffcdb2629634c568b5510367ebdca330
 #> <- content-length: 4860
 #> <- 
 
@@ -119,25 +119,25 @@ resp <- request("https://httr2.r-lib.org") |>
 #> <- HTTP/2 200 
 #> <- server: GitHub.com
 #> <- content-type: text/html; charset=utf-8
-#> <- last-modified: Sun, 04 Oct 2026 15:50:30 GMT
+#> <- last-modified: Sun, 04 Oct 2026 21:35:30 GMT
 #> <- access-control-allow-origin: *
-#> <- etag: W/"6ac275c6-4c24"
-#> <- expires: Sun, 04 Oct 2026 16:04:35 GMT
+#> <- etag: W/"6ac2c6a2-4c24"
+#> <- expires: Sun, 04 Oct 2026 21:49:06 GMT
 #> <- cache-control: max-age=600
 #> <- content-encoding: gzip
 #> <- x-proxy-cache: MISS
-#> <- x-github-request-id: 0AA8:F01FA:919C1B:BC050C:6AC276BB
+#> <- x-github-request-id: 90B2:1B28BC:CF41CD:1087C1F:6AC2C77A
 #> <- x-github-edge-region: iad
 #> <- accept-ranges: bytes
-#> <- date: Sun, 04 Oct 2026 15:55:12 GMT
+#> <- date: Sun, 04 Oct 2026 21:39:59 GMT
 #> <- via: 1.1 varnish
-#> <- age: 0
-#> <- x-served-by: cache-iad-kcgs7200150-IAD
+#> <- age: 21
+#> <- x-served-by: cache-iad-kcgs7200021-IAD
 #> <- x-cache: HIT
-#> <- x-cache-hits: 2
-#> <- x-timer: S1791129313.678916,VS0,VE1
+#> <- x-cache-hits: 3
+#> <- x-timer: S1791150000.572065,VS0,VE1
 #> <- vary: Accept-Encoding
-#> <- x-fastly-request-id: feed600746512fff514b8980ed1c1f8c8e0d2907
+#> <- x-fastly-request-id: bea07da659b13ab07d85dad01be4cadb92c05b1f
 #> <- content-length: 4860
 #> <- 
 ```
