@@ -88,6 +88,10 @@ curl_translate <- function(cmd, simplify_headers = TRUE) {
   }
 
   steps <- add_curl_step(steps, "req_auth_basic", main_args = unname(data$auth))
+  steps <- add_curl_step(steps, "req_timeout", main_args = data$timeout)
+  if (data$progress) {
+    steps <- add_curl_step(steps, "req_progress", keep_if_empty = TRUE)
+  }
 
   perform_args <- list()
   if (data$verbose) {
@@ -192,6 +196,8 @@ curl_normalize <- function(cmd, error_call = caller_env()) {
     headers = headers,
     auth = auth,
     verbose = isTRUE(args[["--verbose"]]),
+    timeout = as.numeric(args[["--max-time"]]),
+    progress = isTRUE(args[["--progress-bar"]]),
     data = data
   )
 }

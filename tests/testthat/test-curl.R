@@ -132,6 +132,8 @@ test_that("can translate to httr calls", {
     curl_translate("curl http://x.com -H 'A B:1'")
     curl_translate("curl http://x.com -u u:p")
     curl_translate("curl http://x.com --verbose")
+    curl_translate("curl http://x.com --max-time 10")
+    curl_translate("curl http://x.com --progress-bar")
   })
 })
 

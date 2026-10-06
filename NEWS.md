@@ -1,5 +1,6 @@
 # httr2 (development version)
 
+* `curl_translate()` now supports `--max-time` and `--progress-bar`.
 * `req_cache()` now respects `Cache-Control: no-store` when it isn't the first directive (#874).
 * `req_dry_run()` now shows the URL's query string in the printed request line and returns it in the `query` element of its result; previously both omitted it (@wikisqueaks, #868).
 * `req_dry_run()` once again redacts credentials added by `req_oauth_*()` and `req_auth_aws_v4()`.

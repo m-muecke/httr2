@@ -73,6 +73,18 @@
     Output
       request("http://x.com/") |>
         req_perform(verbosity = 1)
+    Code
+      curl_translate("curl http://x.com --max-time 10")
+    Output
+      request("http://x.com/") |>
+        req_timeout(10) |>
+        req_perform()
+    Code
+      curl_translate("curl http://x.com --progress-bar")
+    Output
+      request("http://x.com/") |>
+        req_progress() |>
+        req_perform()
 
 # can translate query
 
