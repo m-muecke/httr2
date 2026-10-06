@@ -1,26 +1,27 @@
 # OAuth client authentication
 
 `oauth_client_req_auth()` authenticates a request using the
-authentication strategy defined by the `auth` and `auth_param` arguments
-to
+authentication strategy defined by the `auth` and `auth_params`
+arguments to
 [`oauth_client()`](https://httr2.r-lib.org/dev/reference/oauth_client.md).
 This is used to authenticate the client as part of the OAuth flow,
 **not** to authenticate a request on behalf of a user.
 
 There are three built-in strategies:
 
-- `oauth_client_req_body()` adds the client id and (optionally) the
+- `oauth_client_req_auth_body()` adds the client id and (optionally) the
   secret to the request body, as described in [Section 2.3.1 of RFC
   6749](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1).
 
-- `oauth_client_req_header()` adds the client id and secret using HTTP
-  basic authentication with the `Authorization` header, as described in
-  [Section 2.3.1 of RFC
+- `oauth_client_req_auth_header()` adds the client id and secret using
+  HTTP basic authentication with the `Authorization` header, as
+  described in [Section 2.3.1 of RFC
   6749](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1).
 
-- `oauth_client_jwt_rs256()` adds a client assertion to the body using a
-  JWT signed with `jwt_sign_rs256()` using a private key, as described
-  in [Section 2.2 of RFC
+- `oauth_client_req_auth_jwt_sig()` adds a client assertion to the body
+  using a JWT signed with
+  [`jwt_encode_sig()`](https://httr2.r-lib.org/dev/reference/jwt_claim.md)
+  using a private key, as described in [Section 2.2 of RFC
   7523](https://datatracker.ietf.org/doc/html/rfc7523#section-2.2).
 
 You will generally not call these functions directly but will instead
@@ -128,7 +129,7 @@ client3 <- oauth_client(
   auth = "jwt_sig",
   auth_params = list(claim = jwt_claim())
 )
-# calls oauth_client_req_auth_header_jwt_sig()
+# calls oauth_client_req_auth_jwt_sig()
 req_dry_run(oauth_client_req_auth(req, client3))
 #> POST /whoami HTTP/1.1
 #> accept: */*
@@ -138,5 +139,5 @@ req_dry_run(oauth_client_req_auth(req, client3))
 #> host: example.com
 #> user-agent: httr2/1.3.0.9000 r-curl/8.0.0 libcurl/8.5.0
 #> 
-#> client_assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHAiOjE3OTEyMzU5NjYsIm5iZiI6MTc5MTIzNTY2NiwiaWF0IjoxNzkxMjM1NjY2LCJqdGkiOiI3a3l0MUtBbVYxQ3Z6NlQ0Y1BRVUVPRktOQ2JRUEk3WDI0aXBxbGFrYWdrIn0.rHQB1asPOvogSgNT-ZAdJy7U1C9RPAsqVqs1f5uVbQPJe8oc3Bj-1VCavuye5ZIiRwWNl9mDOkJagkfCyZLnzYwMSdU4_Z4CgsfqDcgLmeDRutzNaLMmw6ob27P1HYImj-XoEhIX0zWBA8reezSK6dSK-JPx6A6WThYR-DULB0_qNDY13L8QicPErYu7t1O3eLCouUq2BqpAbqRBgiOM8Y5kh4MgdLHDFFbZSHjNUm6giJYAE5VXlKOhwH9SZIXFrQZ6rQRo60QCbC9Y5pkBCSwDwlJDfXkcHnEh8eRInGMlSocJ8S9Rag6wiNnO0Fkrjea54ra9T2pTH1WZz1nSxA&client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer
+#> client_assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHAiOjE3OTEzMjE5MDYsIm5iZiI6MTc5MTMyMTYwNiwiaWF0IjoxNzkxMzIxNjA2LCJqdGkiOiJybnB5dGhUaTUycHROaVlaQ0VNMU9QUEJUMWV2d0VkTUNobDNJNVN6anV3In0.gbwmDG8viwe8FsFa4KqBeZGJ8jnCiS7DHLtFXQg_3S4dIyThPg_P9Qs4bvwYn3G7saoHLmgrkcggxagGO7EZotVe1bwbzJQlNuBbEeuoSgeC_tltaJUPR9TIhQAa3_kEG9Vm_iD2bMJJ9Y9Ke4FVqIbu9-hkORAtnmKcHHvmXBWY8PswjWj21AGEWM_hDUzKwxgkqf2dKx8OFdBu47VTN0bW1ChDluxTflMq314-kmn3ZXiAO0mG_sENeaP-MaxNgs1MRIpGy24Pb_DesmDLAx-1k3nsbaaCdxJ9_s9fZgIZShGk90PPhe3PckbywhSHRDR4OYlVG4n1PhENf1HpNg&client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer
 ```
