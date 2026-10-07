@@ -20,7 +20,7 @@ oauth_token(
 
 - access_token:
 
-  The access token used to authenticate request
+  The access token used to authenticate request.
 
 - token_type:
 
@@ -37,7 +37,7 @@ oauth_token(
 
 - ...:
 
-  Additional components returned by the endpoint
+  Additional components returned by the endpoint.
 
 - .date:
 
@@ -64,7 +64,7 @@ oauth_token("abcdef", expires_in = 3600)
 #> <httr2_token>
 #> * token_type  : "bearer"
 #> * access_token: <REDACTED>
-#> * expires_at  : "2026-10-07 08:17:20"
+#> * expires_at  : "2026-10-07 14:56:08"
 oauth_token("abcdef", refresh_token = "ghijkl")
 #> <httr2_token>
 #> * token_type   : "bearer"

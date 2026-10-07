@@ -41,7 +41,7 @@ Create a new object
 - `conn`:
 
   A connection, that is open and ready for reading. `StreamingBody` will
-  take care of closing it.\`
+  take care of closing it.
 
 ------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ Read `n` bytes into a raw vector.
 
 - `n`:
 
-  Number of bytes to read
+  Number of bytes to read.
 
 ------------------------------------------------------------------------
 

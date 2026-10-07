@@ -61,7 +61,7 @@ secret_has_key(key)
 
 - encrypted:
 
-  String to decrypt
+  String to decrypt.
 
 - path:
 
@@ -194,7 +194,7 @@ Sys.setenv("MY_KEY" = key)
 
 x <- secret_encrypt("This is a secret", "MY_KEY")
 x
-#> [1] "TsO07TgGC3gWgrZYh_LJWtrdODgChbl1rfyWBD_s_sk"
+#> [1] "TepCd_XCPKtXPlFXs4R7pr-tNbqCESKBwk2hr-0IWkM"
 secret_decrypt(x, "MY_KEY")
 #> [1] "This is a secret"
 ```
