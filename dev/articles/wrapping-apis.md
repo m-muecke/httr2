@@ -44,6 +44,17 @@ resp <- req |>
 
 # The result comes back as JSON
 resp |> resp_body_json() |> str()
+#> List of 6
+#>  $ status: chr "OK"
+#>  $ code  : int 200
+#>  $ locale: chr "en_US"
+#>  $ seed  : NULL
+#>  $ total : int 1
+#>  $ data  :List of 1
+#>   ..$ :List of 3
+#>   .. ..$ title      : chr "Et velit aut amet sint."
+#>   .. ..$ description: chr "Similique et laudantium deleniti sed. Aut sint officiis ut minus fuga dicta. Temporibus magni eum labore esse t"| __truncated__
+#>   .. ..$ url        : chr "https://picsum.photos/380/480"
 ```
 
 ### Errors
@@ -58,6 +69,8 @@ get an error that prevents you from further inspecting the body:
 req |>
   req_url_path_append("invalid") |>
   req_perform()
+#> Error in `req_perform()`:
+#> ! HTTP 400 Bad Request.
 ```
 
 However, you can access the last response (successful or not) with
@@ -67,6 +80,8 @@ However, you can access the last response (successful or not) with
 
 resp <- last_response()
 resp |> resp_body_json()
+#> $message
+#> [1] "Resource invalid not supported in version v1"
 ```
 
 It doesn’t look like there’s anything useful there. Sometimes useful
@@ -75,6 +90,17 @@ info is returned in the headers, so let’s check:
 ``` r
 
 resp |> resp_headers()
+#> <httr2_headers>
+#> Server: nginx
+#> Content-Type: application/json
+#> Transfer-Encoding: chunked
+#> Connection: keep-alive
+#> X-Powered-By: PHP/8.3.8
+#> Cache-Control: no-cache, private
+#> Date: Sat, 14 Nov 2026 12:43:06 GMT
+#> X-RateLimit-Limit: 60
+#> X-RateLimit-Remaining: 56
+#> Access-Control-Allow-Origin: *
 ```
 
 It doesn’t look like we’re getting any more useful information, so we
@@ -97,6 +123,11 @@ function:
 req |>
   req_user_agent("my_package_name (http://my.package.web.site)") |>
   req_dry_run()
+#> GET /api/v1 HTTP/1.1
+#> accept: */*
+#> accept-encoding: deflate, gzip, br, zstd
+#> host: fakerapi.it
+#> user-agent: my_package_name (http://my.package.web.site)
 ```
 
 ### Core request function
@@ -140,6 +171,17 @@ faker <- function(resource, ..., quantity = 1, locale = "en_US", seed = NULL) {
 }
 
 str(faker("images", width = 300))
+#> List of 6
+#>  $ status: chr "OK"
+#>  $ code  : int 200
+#>  $ locale: chr "en_US"
+#>  $ seed  : NULL
+#>  $ total : int 1
+#>  $ data  :List of 1
+#>   ..$ :List of 3
+#>   .. ..$ title      : chr "Ea sint nam fugiat."
+#>   .. ..$ description: chr "Placeat dolorem cupiditate repellendus molestias et. Vel aut voluptates porro unde eaque velit qui sed. Enim ni"| __truncated__
+#>   .. ..$ url        : chr "https://picsum.photos/300/480"
 ```
 
 I’ve made a few important choices here:
@@ -195,6 +237,34 @@ faker_person <- function(gender = NULL, birthday_start = NULL, birthday_end = NU
   )
 }
 str(faker_person("male"))
+#> List of 6
+#>  $ status: chr "OK"
+#>  $ code  : int 200
+#>  $ locale: chr "en_US"
+#>  $ seed  : NULL
+#>  $ total : int 1
+#>  $ data  :List of 1
+#>   ..$ :List of 10
+#>   .. ..$ id       : int 1
+#>   .. ..$ firstname: chr "Alexandre"
+#>   .. ..$ lastname : chr "Streich"
+#>   .. ..$ email    : chr "mario05@yahoo.com"
+#>   .. ..$ phone    : chr "+12282737252"
+#>   .. ..$ birthday : chr "1992-09-19"
+#>   .. ..$ gender   : chr "male"
+#>   .. ..$ address  :List of 10
+#>   .. .. ..$ id            : int 1
+#>   .. .. ..$ street        : chr "95950 Donato Forks Apt. 011"
+#>   .. .. ..$ streetName    : chr "Bechtelar Mountains"
+#>   .. .. ..$ buildingNumber: chr "83094"
+#>   .. .. ..$ city          : chr "Brenthaven"
+#>   .. .. ..$ zipcode       : chr "01435"
+#>   .. .. ..$ country       : chr "Hungary"
+#>   .. .. ..$ country_code  : chr "HU"
+#>   .. .. ..$ latitude      : num 63
+#>   .. .. ..$ longitude     : num 94.6
+#>   .. ..$ website  : chr "http://klocko.net"
+#>   .. ..$ image    : chr "http://placeimg.com/640/480/people"
 ```
 
 We could make it more user friendly by checking the input types, and
@@ -241,6 +311,14 @@ faker_person <- function(gender = NULL, birthday_start = NULL, birthday_end = NU
   )
 }
 faker_person("male", quantity = 5)
+#> # A tibble: 5 × 4
+#>   firstname lastname email                       gender
+#>   <chr>     <chr>    <chr>                       <chr> 
+#> 1 Fabian    Renner   aletha.gottlieb@hotmail.com male  
+#> 2 Guillermo Fisher   rose.roberts@hotmail.com    male  
+#> 3 Dell      Schuster aditya12@hauck.com          male  
+#> 4 Gregg     Fadel    bednar.drake@herzog.com     male  
+#> 5 Darron    Mante    torp.raheem@gmail.com       male
 ```
 
 The next steps would be to export and document this function; I’ll leave
@@ -283,7 +361,7 @@ steps to this process:
 
     key <- secret_make_key()
     key
-    #> [1] "6wV3Bt7FloV_Mz0ZhCU7Zg"
+    #> [1] "k127uu6X2PNbIEeI3BwIdw"
     ```
 
     (Note that
@@ -301,7 +379,7 @@ steps to this process:
 
     secret_scrambled <- secret_encrypt("secret I need to work with an API", key)
     secret_scrambled
-    #> [1] "XHoHGnmkYIqmySZGTqbQgClwzSGKS_oQtD7bKZYaBW1PjnQD3y6u6-THk4tKo1172g"
+    #> [1] "cJ4RomhWSr4fJmEx-oyqDR9-Qtsym_e-blzp9CV2smc1xu9LlX-KABjo9M3gSI9uZg"
     ```
 
 3.  When needed, you descramble the secret using
@@ -340,7 +418,7 @@ usage.
 
 secret_scrambled <- secret_encrypt("secret I need to work with an API", "YOURPACKAGE_KEY")
 secret_scrambled
-#> [1] "SY93dcIZRqMVK4RlKJr3dQwanfJfunxI_A7sxR_itmqwSv4TFW1kfibjK_-URFPXPw"
+#> [1] "uNiD4dCMeVxbX1np45Ffw_umemH7jLUM8f0MxprLkMNLrMRlg4o-K7z2-uUXbdIuEg"
 secret_decrypt(secret_scrambled, "YOURPACKAGE_KEY")
 #> [1] "secret I need to work with an API"
 ```
@@ -616,6 +694,33 @@ exceptional circumstances.
 nytimes_books <- function(path, ..., api_key = get_api_key()) {
   ...
 }
+```
+
+Read the environment variable when creating each request, as
+`get_api_key()` does here. Avoid reading it when your package is loaded
+and storing the result in a global variable or closure: that copy won’t
+change if the user updates the environment variable later. The default
+`api_key = get_api_key()` is evaluated for each call, so new requests
+use the current value. Requests you’ve already created keep the value
+they were given.
+
+For example, these requests use dummy keys, and
+[`withr::with_envvar()`](https://withr.r-lib.org/reference/with_envvar.html)
+restores the previous environment variable when the code finishes:
+
+``` r
+
+example_request <- function(key = Sys.getenv("EXAMPLE_API_KEY")) {
+  request("https://example.com") |>
+    req_url_query(key = key)
+}
+
+withr::with_envvar(c(EXAMPLE_API_KEY = "first"), {
+  req1 <- example_request()
+  Sys.setenv(EXAMPLE_API_KEY = "second")
+  req2 <- example_request()
+  c(req_get_url(req1), req_get_url(req2))
+})
 ```
 
 You can make this approach a little more user friendly by providing a

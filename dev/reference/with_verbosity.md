@@ -59,32 +59,32 @@ fun <- function() {
 with_verbosity(fun())
 #> -> GET / HTTP/2
 #> -> Host: httr2.r-lib.org
-#> -> User-Agent: httr2/1.3.0.9000 r-curl/8.0.0 libcurl/8.5.0
+#> -> User-Agent: httr2/1.3.0.9000 r-curl/8.1.0 libcurl/8.18.0
 #> -> Accept: */*
 #> -> Accept-Encoding: deflate, gzip, br, zstd
 #> -> 
 #> <- HTTP/2 200 
 #> <- server: GitHub.com
 #> <- content-type: text/html; charset=utf-8
-#> <- last-modified: Thu, 08 Oct 2026 01:31:52 GMT
+#> <- last-modified: Sat, 14 Nov 2026 12:34:28 GMT
 #> <- access-control-allow-origin: *
-#> <- etag: W/"6ac6f288-4c24"
-#> <- expires: Thu, 08 Oct 2026 01:50:06 GMT
+#> <- etag: W/"6af85554-4c24"
+#> <- expires: Sat, 14 Nov 2026 12:52:16 GMT
 #> <- cache-control: max-age=600
 #> <- content-encoding: gzip
 #> <- x-proxy-cache: MISS
-#> <- x-github-request-id: DBD8:A221E:DBAF2:E8F6D:6AC6F475
+#> <- x-github-request-id: 67F8:1CE8:7C2FC3:9568D5:6AF85728
 #> <- x-github-edge-region: iad
 #> <- accept-ranges: bytes
-#> <- date: Thu, 08 Oct 2026 08:00:28 GMT
+#> <- date: Sat, 14 Nov 2026 12:42:56 GMT
 #> <- via: 1.1 varnish
-#> <- age: 54
-#> <- x-served-by: cache-chi-kmdw8640075-CHI
+#> <- age: 6
+#> <- x-served-by: cache-iad-khef600052-IAD
 #> <- x-cache: HIT
-#> <- x-cache-hits: 6
-#> <- x-timer: S1791446429.810792,VS0,VE0
+#> <- x-cache-hits: 5
+#> <- x-timer: S1794660176.190232,VS0,VE2
 #> <- vary: Accept-Encoding
-#> <- x-fastly-request-id: ddb634866e80a5c3f493f747946ebfb825a7d1a0
+#> <- x-fastly-request-id: 9570d6e6ea68b1d76c67487e91817e8cc573d14a
 #> <- content-length: 4860
 #> <- 
 #> <httr2_response>

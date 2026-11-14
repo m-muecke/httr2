@@ -31,7 +31,7 @@ resp <- request(example_url()) |>
   req_perform()
 resp |> resp_raw()
 #> HTTP/1.1 200 OK
-#> Date: Thu, 08 Oct 2026 08:00:25 GMT
+#> Date: Sat, 14 Nov 2026 12:42:51 GMT
 #> Content-Type: application/json
 #> Content-Length: 407
 #> ETag: "de760e6d"

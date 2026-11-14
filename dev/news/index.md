@@ -2,9 +2,15 @@
 
 ## httr2 (development version)
 
+- The on-disk OAuth token cache (used by
+  `req_oauth_*(cache_disk = TRUE)`) now creates its directories with
+  mode `700` and token files with mode `600` so that cached tokens are
+  not readable by other users on the same machine.
 - [`req_cache()`](https://httr2.r-lib.org/dev/reference/req_cache.md)
   now respects `Cache-Control: no-store` when it isn’t the first
   directive ([\#874](https://github.com/r-lib/httr2/issues/874)).
+- [`req_cache()`](https://httr2.r-lib.org/dev/reference/req_cache.md) no
+  longer returns status 304 for revalidated responses.
 - [`req_dry_run()`](https://httr2.r-lib.org/dev/reference/req_dry_run.md)
   now shows the URL’s query string in the printed request line and
   returns it in the `query` element of its result; previously both
@@ -19,6 +25,28 @@
   now name the callback in arity errors.
 - [`req_perform_sequential()`](https://httr2.r-lib.org/dev/reference/req_perform_sequential.md)
   no longer ignores `mock` when `on_error = "stop"`.
+- [`req_url_query()`](https://httr2.r-lib.org/dev/reference/req_url.md)
+  and
+  [`url_modify_query()`](https://httr2.r-lib.org/dev/reference/url_modify.md)
+  now preserve existing query values, including unescaped values
+  supplied with [`I()`](https://rdrr.io/r/base/AsIs.html), when
+  modifying other parameters
+  ([\#837](https://github.com/r-lib/httr2/issues/837)).
+- [`req_url_query()`](https://httr2.r-lib.org/dev/reference/req_url.md)
+  and friends no longer round numeric query parameters to 7 significant
+  digits (now up to 15), and format each value of a multi-value
+  parameter individually so `c(1.5, 2)` becomes `1.5,2` rather than
+  `1.5,2.0`.
+- [`resp_body_raw()`](https://httr2.r-lib.org/dev/reference/resp_body_raw.md)
+  and friends now read large bodies from
+  [`req_perform_connection()`](https://httr2.r-lib.org/dev/reference/req_perform_connection.md)
+  in linear rather than quadratic time
+  ([@ptweezy](https://github.com/ptweezy),
+  [\#901](https://github.com/r-lib/httr2/issues/901)).
+- [`resp_check_content_type()`](https://httr2.r-lib.org/dev/reference/resp_check_content_type.md)
+  and `resp_body_*()` now show the “Override check with
+  `check_type = FALSE`” hint in content type errors
+  ([\#904](https://github.com/r-lib/httr2/issues/904)).
 - [`resp_check_content_type()`](https://httr2.r-lib.org/dev/reference/resp_check_content_type.md)
   now treats media types as case insensitive, as required by RFC 9110,
   so
@@ -26,10 +54,20 @@
   no longer errors on a response with `Content-Type: Application/JSON`
   ([@dylanpulver](https://github.com/dylanpulver),
   [\#871](https://github.com/r-lib/httr2/issues/871)).
+- [`resp_check_status()`](https://httr2.r-lib.org/dev/reference/resp_status.md)
+  once again includes `info` in the error message.
 - [`resp_raw()`](https://httr2.r-lib.org/dev/reference/resp_raw.md) no
   longer errors on responses without a body.
 - [`secret_decrypt_file()`](https://httr2.r-lib.org/dev/reference/secrets.md)
   now makes the decrypted file read-only, as intended.
+- [`str()`](https://rdrr.io/r/utils/str.html) methods for headers,
+  obfuscated strings, and redacted values no longer produce doubled
+  spaces when nested on R 4.7.0 and later, and no longer add a leading
+  space at the top level.
+- [`url_query_parse()`](https://httr2.r-lib.org/dev/reference/url_query_parse.md)
+  now decodes `+` in parameter names as a space and no longer strips
+  quotes or surrounding whitespace, which it previously did because it
+  applied HTTP header parsing rules.
 
 ## httr2 1.3.0
 

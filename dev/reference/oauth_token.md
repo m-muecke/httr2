@@ -64,7 +64,7 @@ oauth_token("abcdef", expires_in = 3600)
 #> <httr2_token>
 #> * token_type  : "bearer"
 #> * access_token: <REDACTED>
-#> * expires_at  : "2026-10-08 09:00:12"
+#> * expires_at  : "2026-11-14 13:42:35"
 oauth_token("abcdef", refresh_token = "ghijkl")
 #> <httr2_token>
 #> * token_type   : "bearer"
